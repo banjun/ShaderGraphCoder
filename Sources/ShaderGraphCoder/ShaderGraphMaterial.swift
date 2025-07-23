@@ -8,8 +8,7 @@
 import Foundation
 import RealityKit
 
-#if os(visionOS)
-
+@available(visionOS 1, macOS 15, *)
 public extension ShaderGraphMaterial {
     @MainActor
     init(surface: SGToken?, geometryModifier: SGToken? = nil) async throws {
@@ -27,5 +26,3 @@ public extension ShaderGraphMaterial {
         }
     }
 }
-
-#endif
