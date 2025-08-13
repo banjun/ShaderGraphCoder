@@ -52,8 +52,10 @@ public extension SGConstantValue {
             return "\"\""
         case .float(let v):
             return "\(v)"
+#if !arch(x86_64)
         case .half(let v):
             return "\(v)"
+#endif
         case .int(let v):
             return "\(v)"
         case .string(let v):
@@ -68,12 +70,14 @@ public extension SGConstantValue {
             return v.usda
         case .vector4f(let v):
             return v.usda
+#if !arch(x86_64)
         case .vector2h(let v):
             return "(\(v.x), \(v.y))"
         case .vector3h(let v):
             return "(\(v.x), \(v.y), \(v.z))"
         case .vector4h(let v):
             return "(\(v.x), \(v.y), \(v.z), \(v.w))"
+#endif
         case .vector2i(let v):
             return "(\(v.x), \(v.y))"
         case .vector3i(let v):

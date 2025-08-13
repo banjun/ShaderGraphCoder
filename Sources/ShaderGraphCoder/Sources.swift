@@ -52,12 +52,14 @@ public extension SGValue {
     static func floatParameter(name: String, defaultValue: Float) -> SGScalar {
         SGScalar(source: .parameter(name: name, defaultValue: .float(defaultValue)))
     }
+#if !arch(x86_64)
     static func half(_ value: Float16) -> SGScalar {
         SGScalar(source: .constant(.half(value)))
     }
     static func halfParameter(name: String, defaultValue: Float16) -> SGScalar {
         SGScalar(source: .parameter(name: name, defaultValue: .half(defaultValue)))
     }
+#endif
 
     static func matrix2d(_ value: simd_float2x2) -> SGMatrix {
         SGMatrix(source: .constant(.matrix2d(value)))
@@ -198,6 +200,7 @@ public extension SGValue {
         return combine(values: [x, y, z, w], dataType: .vector4f)
     }
 
+#if !arch(x86_64)
     static func vector2h(_ value: SIMD2<Float16>) -> SGVector {
         SGVector(source: .constant(.vector2h(value)))
     }
@@ -225,6 +228,7 @@ public extension SGValue {
     static func vector4hParameter(name: String, defaultValue: SIMD4<Float16>) -> SGVector {
         SGVector(source: .parameter(name: name, defaultValue: .vector4h(defaultValue)))
     }
+#endif
     static func vector2h(_ x: SGScalar, _ y: SGScalar) -> SGVector {
         return combine(values: [x, y], dataType: .vector2h)
     }

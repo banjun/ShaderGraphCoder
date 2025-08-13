@@ -212,7 +212,9 @@ public enum SGConstantValue {
     case color4f(_ value: SIMD4<Float>, colorSpace: SGColorSpace?)
     case emptyTexture
     case float(_ value: Float)
+#if !arch(x86_64)
     case half(_ value: Float16)
+#endif
     case int(_ value: Int)
     case matrix2d(_ value: simd_float2x2)
     case matrix3d(_ value: simd_float3x3)
@@ -220,9 +222,11 @@ public enum SGConstantValue {
     case vector2f(_ value: SIMD2<Float>)
     case vector3f(_ value: SIMD3<Float>)
     case vector4f(_ value: SIMD4<Float>)
+#if !arch(x86_64)
     case vector2h(_ value: SIMD2<Float16>)
     case vector3h(_ value: SIMD3<Float16>)
     case vector4h(_ value: SIMD4<Float16>)
+#endif
     case vector2i(_ value: SIMD2<Int>)
     case vector3i(_ value: SIMD3<Int>)
     case vector4i(_ value: SIMD4<Int>)
@@ -241,8 +245,10 @@ public enum SGConstantValue {
             return .asset
         case .float:
             return .float
+#if !arch(x86_64)
         case .half:
             return .half
+#endif
         case .int:
             return .int
         case .matrix2d:
@@ -263,12 +269,14 @@ public enum SGConstantValue {
             return .vector3f
         case .vector4f:
             return .vector4f
+#if !arch(x86_64)
         case .vector2h:
             return .vector2h
         case .vector3h:
             return .vector3h
         case .vector4h:
             return .vector4h
+#endif
         case .vector2i:
             return .vector2i
         case .vector3i:
