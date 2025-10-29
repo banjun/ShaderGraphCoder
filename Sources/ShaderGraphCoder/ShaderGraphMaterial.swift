@@ -8,7 +8,7 @@
 import Foundation
 import RealityKit
 
-@available(visionOS 1, macOS 15, *)
+@available(visionOS 1, macOS 15, iOS 18, *)
 public extension ShaderGraphMaterial {
     @MainActor
     init(surface: SGToken?, geometryModifier: SGToken? = nil) async throws {
