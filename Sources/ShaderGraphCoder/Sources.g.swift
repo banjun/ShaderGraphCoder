@@ -489,7 +489,7 @@ public extension SGValue {
             nodeType: "ND_realitykit_surface_world_to_view",
             inputs: [
             ],
-            outputs: [.init(dataType: SGDataType.matrix4d)])))
+            outputs: [.init(name: "worldToView", dataType: SGDataType.matrix4d)]), "worldToView"))
     }
     /// Tangent
     static func tangent(space: SGSpace = SGSpace.object, index: Int = 0) -> SGVector {
