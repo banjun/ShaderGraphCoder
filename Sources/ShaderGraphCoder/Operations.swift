@@ -11,10 +11,11 @@ public func clamp<T>(_ in1: T, min: Float, max: Float) -> T where T: SGNumeric {
     clamp<T>(in1, min: SGValue.float(min), max: SGValue.float(max))
 }
 
-func combine<T>(values: [SGScalar], dataType: SGDataType) -> T where T: SGSIMD {
+func combine<T>(values: [SGValue], dataType: SGDataType) -> T where T: SGValue {
     var errors: [String] = []
     var n = 3
     let nodeSuffix = getNodeSuffixForDataType(dataType)
+    var isRealityKitNode = false
     let elementType = SGDataType.float
     switch dataType {
     case .color3f:
@@ -39,6 +40,15 @@ func combine<T>(values: [SGScalar], dataType: SGDataType) -> T where T: SGSIMD {
         n = 3
     case .vector4i:
         n = 4
+    case .matrix2d:
+        n = 2
+        isRealityKitNode = true
+    case .matrix3d:
+        n = 3
+        isRealityKitNode = true
+    case .matrix4d:
+        n = 4
+        isRealityKitNode = true
     default:
         errors.append("Cannot combine \(dataType.usda)")
     }
@@ -51,7 +61,7 @@ func combine<T>(values: [SGScalar], dataType: SGDataType) -> T where T: SGSIMD {
     }
     let outputs: [SGNode.Output] = [.init(dataType: dataType)]
     let sep = SGNode(
-        nodeType: "ND_combine\(n)_\(nodeSuffix)",
+        nodeType: ["ND", isRealityKitNode ? "realitykit" : nil, "combine\(n)", "\(nodeSuffix)"].compactMap {$0}.joined(separator: "_"),
         inputs: inputs,
         outputs: outputs)
     return T(source: .nodeOutput(sep))

@@ -67,6 +67,9 @@ public extension SGValue {
     static func matrix2d(col0: SIMD2<Float>, col1: SIMD2<Float>) -> SGMatrix {
         SGMatrix(source: .constant(.matrix2d(simd_float2x2(columns: (col0, col1)))))
     }
+    static func matrix2d(_ x: SGVector, _ y: SGVector) -> SGMatrix {
+        return combine(values: [x, y], dataType: .matrix2d)
+    }
     static func matrix2dParameter(name: String, defaultValue: simd_float2x2) -> SGMatrix {
         SGMatrix(source: .parameter(name: name, defaultValue: .matrix2d(defaultValue)))
     }
@@ -77,6 +80,9 @@ public extension SGValue {
     static func matrix3d(col0: SIMD3<Float>, col1: SIMD3<Float>, col2: SIMD3<Float>) -> SGMatrix {
         SGMatrix(source: .constant(.matrix3d(simd_float3x3(columns: (col0, col1, col2)))))
     }
+    static func matrix3d(_ x: SGVector, _ y: SGVector, _ z: SGVector) -> SGMatrix {
+        return combine(values: [x, y, z], dataType: .matrix3d)
+    }
     static func matrix3dParameter(name: String, defaultValue: simd_float3x3) -> SGMatrix {
         SGMatrix(source: .parameter(name: name, defaultValue: .matrix3d(defaultValue)))
     }
@@ -86,6 +92,9 @@ public extension SGValue {
     }
     static func matrix4d(col0: SIMD4<Float>, col1: SIMD4<Float>, col2: SIMD4<Float>, col3: SIMD4<Float>) -> SGMatrix {
         SGMatrix(source: .constant(.matrix4d(simd_float4x4(columns: (col0, col1, col2, col3)))))
+    }
+    static func matrix4d(_ x: SGVector, _ y: SGVector, _ z: SGVector, _ w: SGVector) -> SGMatrix {
+        return combine(values: [x, y, z, w], dataType: .matrix4d)
     }
     static func matrix4dParameter(name: String, defaultValue: simd_float4x4) -> SGMatrix {
         SGMatrix(source: .parameter(name: name, defaultValue: .matrix4d(defaultValue)))
